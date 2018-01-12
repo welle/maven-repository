@@ -1,0 +1,210 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>aka.jwow</groupId>
+	<artifactId>JDumpWoW</artifactId>
+	<version>0.0.1</version>
+
+	<properties>
+		<version.java>1.8</version.java>
+		<!-- Version of third libraries -->
+		<spring.version>5.0.0.RELEASE</spring.version>
+		<version.spring-data-jpa>2.0.0.RELEASE</version.spring-data-jpa>
+		<version.spring-security>4.2.3.RELEASE</version.spring-security>
+		<version.servlet-api>4.0.0</version.servlet-api>
+		<version.hibernate>5.2.11.Final</version.hibernate>
+		<version.hibernate-javassist>3.22.0-CR2</version.hibernate-javassist>
+		<version.hibernate-jpa-2.1-api>1.0.0.Final</version.hibernate-jpa-2.1-api>
+		<version.aspectj>1.8.11</version.aspectj>
+		<version.logback>1.2.3</version.logback>
+		<version.slf4j>1.7.21</version.slf4j>
+		<version.mysql>5.1.6</version.mysql>
+		<version.junit>4.12</version.junit>
+		<version.jackson>2.9.2</version.jackson>
+		<version.jwowjpa>0.0.1</version.jwowjpa>
+		<version.bootstrap>3.3.7</version.bootstrap>
+		<version.commons-dbcp>1.4</version.commons-dbcp>
+
+		<!-- Version of maven plugins -->
+		<version.plugin.maven-eclipse-plugin>2.9</version.plugin.maven-eclipse-plugin>
+		<version.plugin.maven-compiler-plugin>2.3</version.plugin.maven-compiler-plugin>
+		<version.plugin.maven-resources-plugin>2.4.3</version.plugin.maven-resources-plugin>
+		<version.plugin.maven-source-plugin>2.1.2</version.plugin.maven-source-plugin>
+		<version.plugin.maven-javadoc-plugin>2.7</version.plugin.maven-javadoc-plugin>
+		<version.plugin.maven-release-plugin>2.2.2</version.plugin.maven-release-plugin>
+		<version.plugin.maven-deploy-plugin>2.8.1</version.plugin.maven-deploy-plugin>
+
+		<version.eclipse.annotations>2.0.0</version.eclipse.annotations>
+		<!-- Source encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>m2e</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<properties>
+				<m2e.jdt.annotationpath>/JDumpWoW/src/main/resources/externalAnnotations</m2e.jdt.annotationpath>
+			</properties>
+			<dependencies>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>appserverConfig-dev</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>dev</value>
+				</property>
+			</activation>
+			<properties>
+				<github.maven.repository>file:///c:/Projects/Own/maven-repository/</github.maven.repository>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>appserverConfig-dev-2</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>dev-travis</value>
+				</property>
+			</activation>
+			<properties>
+				<github.maven.repository>file:///home/travis/repository</github.maven.repository>
+			</properties>
+		</profile>
+	</profiles>
+
+	<repositories>
+		<repository>
+			<id>welle-maven-repository</id>
+			<url>https://raw.githubusercontent.com/welle/maven-repository/master/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>aka.jwowjpa</groupId>
+			<artifactId>JWoWJPA</artifactId>
+			<version>${version.jwowjpa}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.eclipse.jdt/org.eclipse.jdt.annotation -->
+		<dependency>
+			<groupId>org.eclipse.jdt</groupId>
+			<artifactId>org.eclipse.jdt.annotation</artifactId>
+			<version>${version.eclipse.annotations}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.group.project</groupId>
+			<artifactId>Project</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/libs/JHTTPRequest.jar</systemPath>
+		</dependency>
+		<!-- Tests -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.7.13</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot</artifactId>
+			<version>1.5.8.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>1.5.8.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>2.0.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.7.9</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.3.0.603</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>maven-repository</id>
+			<url>${github.maven.repository}</url>
+		</repository>
+	</distributionManagement>
+</project>
